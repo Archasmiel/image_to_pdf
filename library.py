@@ -1,13 +1,12 @@
 from PIL import Image
+import glob
 
 
-def make_filename(num: int, extension: str):
-    if num < 10:
-        return f'00{num}.{extension}'
-    elif num < 100:
-        return f'0{num}.{extension}'
-    else:
-        return f'{num}.{extension}'
+def make_list_from_extensions(file_path: str, extensions: list):
+    files = []
+    for i in extensions:
+        files.extend(glob.glob(rf'{file_path}\{i}'))
+    return files
 
 
 def load_image(file: str, pressure: float):

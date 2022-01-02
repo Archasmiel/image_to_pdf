@@ -2,18 +2,26 @@ from library import *
 
 
 # path to your files (this example for one exact folder)
-file_path = rf'C:\PngToPdf'
+input_path = rf'C:\PngToPdf'
+extensions = [
+    '*.png',
+    '*.jpg',
+    '*.jpeg',
+]
 
 # pressure of images - type pressure as coefficient
 # it must be between 0 and 1 for pressured files
 # more than 1 will give you no sufficient result of quality
 # comparing to 1 - bigger size, same quality
-file_pressure = 0.66
+file_pressure = 1
+output_path = rf'C:\PngToPdf'
 
 # images path array
-all_images = [
-    rf'{file_path}\{make_filename(1, "jpg")}',
-    rf'{file_path}\{make_filename(2, "jpg")}',
-]
+images = make_list_from_extensions(input_path, extensions)
 
-make_pdf_file(all_images, file_path, file_pressure)
+print(f'\nAll files, compiled into pdf with compress coefficient {file_pressure}:')
+for num, val in enumerate(images):
+    print(f'[{num+1}]: {val}')
+
+make_pdf_file(images, output_path, file_pressure)
+print(f'\nResult was compiled to {output_path}\\result.pdf.')
